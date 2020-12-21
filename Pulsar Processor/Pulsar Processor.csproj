@@ -79,5 +79,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Deep Learning Model\" />
+    <Folder Include="Evaluation Method\" />
+    <Folder Include="Misc\" />
+    <Folder Include="Pulsar Database\" />
+    <Folder Include="Pulsar Extraction\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
