@@ -17,7 +17,9 @@ namespace Pulsar_Processor
         public static string FileLoaded = "";
         public static string FileData = "";
         public static string[] DataChunks;
-        public static int[] PossiblePeriods;
+        public static List<int> PossiblePeriods = new List<int>();
+        public static List<float> DataChunks_Float = new List<float>();
+        public static int CurrentPeriodTest = 0;
 
         public Home()
         {
@@ -29,8 +31,7 @@ namespace Pulsar_Processor
             Log("Pulsar processor initiated..");
         }
 
-
-        #region MISC
+        #region Basic Data Processing
 
         public void Log(string ks)
         {
@@ -62,17 +63,58 @@ namespace Pulsar_Processor
         
         private void locatePossiblePeriods()
         {
+            if (DataChunks_Float.Count < 5)
+            {
+                List<string> ms = DataChunks.ToList<string>();
+                foreach (string l in DataChunks)
+                {
+                    try
+                    {
+                        DataChunks_Float.Add(float.Parse(l));
+                    }
+                    catch
+                    {
+                        DataChunks_Float.Add(0);
+                    }
+                }
+            }
 
+            int sizeOfDatachunks = DataChunks.Length;
+            PossiblePeriods = new List<int>();
+            for (int i = 2; i < sizeOfDatachunks; i++)
+            {
+                float temp = sizeOfDatachunks % i;//To see if there is a remainder.
+                if (temp == 0)
+                {
+                    Log("At x=" + i.ToString() + ", is a possible period.");
+                    PossiblePeriods.Add(i);
+                }
+            }
+
+            FixPeriods();
         }
 
         private void FixPeriods()//This code will fix the period data by adding random values to fullfill the epoch folding.
         {
-
+            if (PossiblePeriods.Count == 0)
+            {
+                Log("No possible period was found, fixing...");
+                Random rn = new Random();
+                int k = rn.Next(0, 90);
+                DataChunks_Float.Add(float.Parse(k.ToString()));
+                Log("Tried to add noise stuff for fixing our periods. Retrying");
+                locatePossiblePeriods();
+            }
         }
 
-        private void TryPeriod()
+        private void ChoosePeriod()
         {
-            
+            Random rn = new Random();
+            int r = rn.Next(1, PossiblePeriods.Count);
+            int CurrentPeriod = PossiblePeriods[r];
+            PossiblePeriods.RemoveAt(r);
+            CurrentPeriodTest = CurrentPeriod;
+            Log("The choosen period is about " + CurrentPeriodTest + " bins");
         }
 
         #endregion
@@ -96,7 +138,10 @@ namespace Pulsar_Processor
             Log("Chopping data into array");
             splitDataIntoArray();
             Log("Trying to find accurate period of pulsars");
-
+            locatePossiblePeriods();
+            Log("Choosing the period to perform folding...");
+            ChoosePeriod();
+            Log("Starting the folding procces on a seperate unsafe thread..");
         }
     }
 }
