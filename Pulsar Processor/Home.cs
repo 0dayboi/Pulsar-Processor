@@ -8,11 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Threading;
 
 namespace Pulsar_Processor
 {
     public partial class Home : Form
     {
+        EpochFolding myEpoch = new EpochFolding();
         DateTime dt = new DateTime();
         public static string FileLoaded = "";
         public static string FileData = "";
@@ -21,9 +23,13 @@ namespace Pulsar_Processor
         public static List<float> DataChunks_Float = new List<float>();
         public static int CurrentPeriodTest = 0;
 
+        Thread myEpochFolderThread;
+
         public Home()
         {
             InitializeComponent();
+            Home.CheckForIllegalCrossThreadCalls = false;
+
         }
 
         private void Home_Load(object sender, EventArgs e)
@@ -106,7 +112,10 @@ namespace Pulsar_Processor
                 locatePossiblePeriods();
             }
         }
-
+        public void GETTER(string finality)
+        {
+            richTextBox1.Text = finality;
+        }
         private void ChoosePeriod()
         {
             Random rn = new Random();
@@ -115,6 +124,16 @@ namespace Pulsar_Processor
             PossiblePeriods.RemoveAt(r);
             CurrentPeriodTest = CurrentPeriod;
             Log("The choosen period is about " + CurrentPeriodTest + " bins");
+        }
+
+        private void LaunchEpochFolder()
+        {
+            myEpochFolderThread = new Thread(myEpoch.EXTRACT_PULSAR);
+            myEpochFolderThread.Name = "Epoch folding thread";
+            myEpochFolderThread.Priority = ThreadPriority.Highest;
+            myEpochFolderThread.IsBackground = true;
+            
+            myEpochFolderThread.Start();
         }
 
         #endregion
@@ -142,6 +161,7 @@ namespace Pulsar_Processor
             Log("Choosing the period to perform folding...");
             ChoosePeriod();
             Log("Starting the folding procces on a seperate unsafe thread..");
+            LaunchEpochFolder();
         }
     }
 }
