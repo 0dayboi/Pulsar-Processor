@@ -28,7 +28,7 @@ namespace Pulsar_Processor
                 }
                 FoldedSignal.Add(final_sample_datalet);
             }
-            Program.myHome.Log("Folding completed. ");
+            Program.myHome.Log("Folding completed. Folding length " + FoldedSignal.Count.ToString());
             string finality = "";
             foreach(float c in FoldedSignal)
             {

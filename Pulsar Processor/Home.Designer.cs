@@ -39,8 +39,8 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.fileDialog = new System.Windows.Forms.OpenFileDialog();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.fileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -142,11 +142,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "System Information";
             // 
-            // fileDialog
-            // 
-            this.fileDialog.FileName = "Data File";
-            this.fileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.fileDialog_FileOk);
-            // 
             // richTextBox1
             // 
             this.richTextBox1.Location = new System.Drawing.Point(175, -1);
@@ -154,6 +149,11 @@
             this.richTextBox1.Size = new System.Drawing.Size(100, 96);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
+            // 
+            // fileDialog
+            // 
+            this.fileDialog.FileName = "Data File";
+            this.fileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.fileDialog_FileOk);
             // 
             // Home
             // 

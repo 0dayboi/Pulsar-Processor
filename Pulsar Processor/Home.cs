@@ -22,7 +22,6 @@ namespace Pulsar_Processor
         public static List<int> PossiblePeriods = new List<int>();
         public static List<float> DataChunks_Float = new List<float>();
         public static int CurrentPeriodTest = 0;
-
         Thread myEpochFolderThread;
 
         public Home()
@@ -57,6 +56,7 @@ namespace Pulsar_Processor
                FileData = File.ReadAllText(FileLoaded);
                Log("Temporary data has been stored in memory, loaded succesfully. Total size: " + FileData.Length.ToString());
                Log("Data reading process finished.");
+                
             }
 
         }
@@ -64,6 +64,15 @@ namespace Pulsar_Processor
         private void splitDataIntoArray()
         {
             DataChunks = FileData.Split(',');
+            //List<string> ks = DataChunks.ToList<string>();
+            //for (int index = 0; index < ks.Count; index++)
+            //{
+            //    if (ks[index] == "0")
+            //    {
+            //        ks.RemoveAt(index);
+            //    }
+            //}
+            //DataChunks = ks.ToArray<string>();
             Log("Array splitted into " + DataChunks.Length.ToString() + " chunks");
         }
         
@@ -76,7 +85,11 @@ namespace Pulsar_Processor
                 {
                     try
                     {
-                        DataChunks_Float.Add(float.Parse(l));
+                        if (l != "0")
+                        {
+                            DataChunks_Float.Add((float.Parse(l)));
+                        }
+                       
                     }
                     catch
                     {
@@ -85,7 +98,7 @@ namespace Pulsar_Processor
                 }
             }
 
-            int sizeOfDatachunks = DataChunks.Length;
+            int sizeOfDatachunks = DataChunks_Float.Count;
             PossiblePeriods = new List<int>();
             for (int i = 2; i < sizeOfDatachunks; i++)
             {
@@ -132,7 +145,6 @@ namespace Pulsar_Processor
             myEpochFolderThread.Name = "Epoch folding thread";
             myEpochFolderThread.Priority = ThreadPriority.Highest;
             myEpochFolderThread.IsBackground = true;
-            
             myEpochFolderThread.Start();
         }
 
