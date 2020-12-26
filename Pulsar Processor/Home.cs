@@ -87,7 +87,8 @@ namespace Pulsar_Processor
                     {
                         if (l != "0")
                         {
-                            DataChunks_Float.Add((float.Parse(l)));
+                            string makka = l.Replace('.', ',');
+                            DataChunks_Float.Add(Convert.ToSingle((double.Parse(makka))));
                         }
                        
                     }
@@ -135,7 +136,7 @@ namespace Pulsar_Processor
             int r = rn.Next(1, PossiblePeriods.Count);
             int CurrentPeriod = PossiblePeriods[r];
             PossiblePeriods.RemoveAt(r);
-            CurrentPeriodTest = CurrentPeriod;
+            CurrentPeriodTest = 19;
             Log("The choosen period is about " + CurrentPeriodTest + " bins");
         }
 
@@ -174,6 +175,11 @@ namespace Pulsar_Processor
             ChoosePeriod();
             Log("Starting the folding procces on a seperate unsafe thread..");
             LaunchEpochFolder();
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }

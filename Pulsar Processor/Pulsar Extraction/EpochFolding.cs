@@ -17,22 +17,33 @@ namespace Pulsar_Processor
             //Actual folding start
             List<float> FoldedSignal = new List<float>();
             int SamplesPerBin = (Home.DataChunks_Float.Count / Home.CurrentPeriodTest);
-            for (int i = 0; i < SamplesPerBin; i++)
+            for(int z = 0; z < SamplesPerBin; z++) { FoldedSignal.Add(Home.DataChunks_Float[z]); }
+            float[] temp_ = FoldedSignal.ToArray<float>();
+            int second_index = 0;
+            for (int x = 1; x < Home.CurrentPeriodTest; x++)
             {
-                float final_sample_datalet = 0f;
-                int sample_index = i;
-                for (int x = 0; x < Home.CurrentPeriodTest; x++)
-                {
-                    final_sample_datalet += Home.DataChunks_Float[sample_index];
-                    sample_index = sample_index + SamplesPerBin;
-                }
-                FoldedSignal.Add(final_sample_datalet);
+                    for (int n = 0; n < SamplesPerBin; n++)
+                    {
+                        temp_[n] = Home.DataChunks_Float[second_index];
+                        second_index++;
+                    }
+                    if (x != 1)
+                    {   
+                        for (int i = 0; i < SamplesPerBin; i++)//int x = 0; x < Home.CurrentPeriodTest; x++
+                        {
+                            FoldedSignal[i] += temp_[i]; 
+                            //final_sample_datalet += Home.DataChunks_Float[sample_index];
+                            //sample_index = sample_index + SamplesPerBin;
+                        }
+                    }
+                /*FoldedSignal.Add(final_sample_datalet);*/
             }
             Program.myHome.Log("Folding completed. Folding length " + FoldedSignal.Count.ToString());
             string finality = "";
             foreach(float c in FoldedSignal)
             {
-                finality = finality + Environment.NewLine + c.ToString();
+                float k = c / 100;
+                finality = finality + Environment.NewLine + k.ToString();
             }
             Program.myHome.GETTER(finality);
         }
