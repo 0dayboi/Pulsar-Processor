@@ -27,7 +27,6 @@ namespace Pulsar_Processor
                     temp_[n] = Home.DataChunks_Float[second_index];
                     second_index++;
                 }
-
                 if (x != 1)
                 {
                     for (int i = 0; i < SamplesPerBin; i++)//int x = 0; x < Home.CurrentPeriodTest; x++
@@ -39,12 +38,16 @@ namespace Pulsar_Processor
                 /*FoldedSignal.Add(final_sample_datalet);*/
             }
             Program.myHome.Log("Folding completed. Folding length " + FoldedSignal.Count.ToString());
+            Program.myHome.Log("Pulsar folded data dumping started, making the format readable");
             string finality = "";
             foreach(double c in FoldedSignal)
             {
-                finality = finality + Environment.NewLine + c.ToString();
+                string mks = c.ToString();
+                mks = mks.Replace(',','.');
+                finality = finality + Environment.NewLine + mks.ToString();
             }
             Program.myHome.GETTER(finality);
+            Program.myHome.Log("Pulsars dumped, the following data can be opened on Signal Processing Toolbox on MATLAB");
         }
 
     }
