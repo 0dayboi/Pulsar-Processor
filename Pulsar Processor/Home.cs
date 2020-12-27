@@ -20,7 +20,7 @@ namespace Pulsar_Processor
         public static string FileData = "";
         public static string[] DataChunks;
         public static List<int> PossiblePeriods = new List<int>();
-        public static List<float> DataChunks_Float = new List<float>();
+        public static List<double> DataChunks_Float = new List<double>();
         public static int CurrentPeriodTest = 0;
         Thread myEpochFolderThread;
 
@@ -88,7 +88,7 @@ namespace Pulsar_Processor
                         if (l != "0")
                         {
                             string makka = l.Replace('.', ',');
-                            DataChunks_Float.Add(Convert.ToSingle((double.Parse(makka))));
+                            DataChunks_Float.Add(double.Parse(makka));
                         }
                        
                     }
