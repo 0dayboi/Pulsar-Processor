@@ -28,22 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             this.richTxtBox_Console = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtBox_Filepath = new System.Windows.Forms.TextBox();
             this.btnSelectFile = new System.Windows.Forms.Button();
             this.btnStartPulsarProcessing = new System.Windows.Forms.Button();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.fileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.label4 = new System.Windows.Forms.Label();
-            this.toolStrip1.SuspendLayout();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.pulsarDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showPulsarDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTxtBox_Console
@@ -71,7 +72,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 24);
+            this.label2.Location = new System.Drawing.Point(11, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(101, 13);
             this.label2.TabIndex = 2;
@@ -105,26 +106,6 @@
             this.btnStartPulsarProcessing.UseVisualStyleBackColor = true;
             this.btnStartPulsarProcessing.Click += new System.EventHandler(this.btnStartPulsarProcessing_Click);
             // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(793, 25);
-            this.toolStrip1.TabIndex = 6;
-            this.toolStrip1.Text = "toolStrip1";
-            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -136,6 +117,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.richTextBox1);
             this.groupBox1.Location = new System.Drawing.Point(205, 68);
@@ -144,6 +126,15 @@
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "System Information";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(282, 24);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(106, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Pulsar Folded Data : ";
             // 
             // richTextBox1
             // 
@@ -158,14 +149,38 @@
             this.fileDialog.FileName = "Data File";
             this.fileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.fileDialog_FileOk);
             // 
-            // label4
+            // menuStrip1
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(282, 24);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(106, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Pulsar Folded Data : ";
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pulsarDatabaseToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(793, 24);
+            this.menuStrip1.TabIndex = 9;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // pulsarDatabaseToolStripMenuItem
+            // 
+            this.pulsarDatabaseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showPulsarDatabaseToolStripMenuItem});
+            this.pulsarDatabaseToolStripMenuItem.Name = "pulsarDatabaseToolStripMenuItem";
+            this.pulsarDatabaseToolStripMenuItem.Size = new System.Drawing.Size(102, 20);
+            this.pulsarDatabaseToolStripMenuItem.Text = "Pulsar Database";
+            // 
+            // showPulsarDatabaseToolStripMenuItem
+            // 
+            this.showPulsarDatabaseToolStripMenuItem.Name = "showPulsarDatabaseToolStripMenuItem";
+            this.showPulsarDatabaseToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.showPulsarDatabaseToolStripMenuItem.Text = "Show pulsar database";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 25);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(113, 13);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Error: 0.50 Seconds +-";
             // 
             // Home
             // 
@@ -174,7 +189,7 @@
             this.ClientSize = new System.Drawing.Size(793, 447);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.btnStartPulsarProcessing);
             this.Controls.Add(this.btnSelectFile);
             this.Controls.Add(this.txtBox_Filepath);
@@ -182,14 +197,15 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.richTxtBox_Console);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Home";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pulsar Processor";
             this.Load += new System.EventHandler(this.Home_Load);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,13 +219,15 @@
         private System.Windows.Forms.TextBox txtBox_Filepath;
         private System.Windows.Forms.Button btnSelectFile;
         private System.Windows.Forms.Button btnStartPulsarProcessing;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.OpenFileDialog fileDialog;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem pulsarDatabaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showPulsarDatabaseToolStripMenuItem;
+        private System.Windows.Forms.Label label5;
     }
 }
 

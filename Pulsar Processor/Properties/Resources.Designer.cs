@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Pulsar_Processor.Properties
-{
-
-
+namespace Pulsar_Processor.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -19,52 +19,82 @@ namespace Pulsar_Processor.Properties
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources
-    {
-
+    internal class Resources {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources()
-        {
+        internal Resources() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if ((resourceMan == null))
-                {
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Pulsar_Processor.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to J0030+0451;0.0049
+        ///B0031-07;0.9430
+        ///J0034-0534;0.0019
+        ///B0138+59;12.229
+        ///B0149-16;0.8327
+        ///B0301+19;13.876
+        ///B0320+39;30.321
+        ///B0329+54;0.7145
+        ///B0355+54;0.1564
+        ///B0450+55;0.3407
+        ///B0525+21;37.455
+        ///B0628-28;12.444
+        ///B0655+64;0.1957
+        ///B0809+74;12.922
+        ///B0818-13;12.381
+        ///B0823+26;0.5307
+        ///B0834+06;12.738
+        ///B0906-17;0.4016
+        ///B0919+06;0.4306
+        ///B0943+10;10.977
+        ///B0950+08;0.2531
+        ///B1112+50;16.564
+        ///B1133+16;11.879
+        ///B1237+25;13.824
+        ///B1508+55;0.7397
+        ///B1540-06;0.7091
+        ///B1541+09;0.7484
+        ///B1604-00;0.4218
+        ///B1612+07;12.068
+        ///B1642-03;0.3877 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string PulsarDatabase_CSV {
+            get {
+                return ResourceManager.GetString("PulsarDatabase_CSV", resourceCulture);
             }
         }
     }

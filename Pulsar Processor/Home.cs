@@ -33,6 +33,8 @@ namespace Pulsar_Processor
 
         private void Home_Load(object sender, EventArgs e)
         {
+            Pulsar_Database.PulsarDB mc = new Pulsar_Database.PulsarDB();
+            mc.AddPulsars();
             Log("Pulsar processor initiated..");
         }
 
