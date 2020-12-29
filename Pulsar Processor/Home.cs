@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
+using Pulsar_Processor.Pulsar_Matching_Algorithms;
 
 namespace Pulsar_Processor
 {
@@ -23,6 +24,8 @@ namespace Pulsar_Processor
         public static List<double> DataChunks_Float = new List<double>();
         public static int CurrentPeriodTest = 0;
         Thread myEpochFolderThread;
+
+        ML_ModelTrainer myModel = new ML_ModelTrainer();
 
         public Home()
         {
@@ -182,6 +185,14 @@ namespace Pulsar_Processor
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Thread myThe = new Thread(myModel.Main);
+            myThe.Priority = ThreadPriority.Normal;
+            myThe.IsBackground = true;
+            myThe.Start();
         }
     }
 }
