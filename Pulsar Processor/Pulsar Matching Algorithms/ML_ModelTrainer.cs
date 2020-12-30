@@ -20,9 +20,7 @@ namespace Pulsar_Processor.Pulsar_Matching_Algorithms
         {
             MainTrainingData = mlContext.Data.LoadFromTextFile<SignalsDataInformation>(path: _dataPath, hasHeader: true, separatorChar: ',');
             int period = DetectPeriod(mlContext, MainTrainingData);
-
             DetectAnomaly(mlContext, MainTrainingData, period);
-
         }
 
         static int DetectPeriod(MLContext mlContext, IDataView signalData)

@@ -32,7 +32,6 @@ namespace Pulsar_Processor
                     for (int i = 0; i < SamplesPerBin; i++)//int x = 0; x < Home.CurrentPeriodTest; x++
                     {
                         FoldedSignal[i] += temp_[i];
-
                     }
                 }
                 /*FoldedSignal.Add(final_sample_datalet);*/

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 using Pulsar_Processor.Pulsar_Matching_Algorithms;
+using Pulsar_Processor.Pulsar_Matching_Algorithms.IID_Spike_Detector;
 
 namespace Pulsar_Processor
 {
@@ -25,7 +26,7 @@ namespace Pulsar_Processor
         public static int CurrentPeriodTest = 0;
         Thread myEpochFolderThread;
 
-        ML_ModelTrainer myModel = new ML_ModelTrainer();
+        Trainer myModel = new Trainer();
 
         public Home()
         {
@@ -189,7 +190,7 @@ namespace Pulsar_Processor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Thread myThe = new Thread(myModel.Main);
+            Thread myThe = new Thread(myModel.EntryMain);
             myThe.Priority = ThreadPriority.Normal;
             myThe.IsBackground = true;
             myThe.Start();
