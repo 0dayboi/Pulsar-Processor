@@ -21,6 +21,7 @@ namespace Pulsar_Processor.Pulsar_Matching_Algorithms.IID_Spike_Detector
 
         IDataView dataView;
 
+        public static List<SpikeInformation> SpikeData = new List<SpikeInformation>();
 
         public void EntryMain()
         {
@@ -36,18 +37,22 @@ namespace Pulsar_Processor.Pulsar_Matching_Algorithms.IID_Spike_Detector
             var predictions = mlContext.Data.CreateEnumerable<PulsePrediction>(transformedData, reuseRowObject: false);
             Program.myHome.Log("Alert\tScore\tP-Value");
             string mrk = "";
+            int sampleIndex = 1;
             foreach (var p in predictions)
             {
                 var results = $"{p.Prediction[0]}\t{p.Prediction[1]:f2}\t{p.Prediction[2]:F2}";
 
                 if (p.Prediction[0] == 1)
                 {
-                    results += " <-- Spike detected" + Environment.NewLine;
+                    SpikeInformation newSpike = new SpikeInformation();
+                    newSpike.SampleIndex = sampleIndex;
+                    newSpike.SampleValue = p.Prediction[1];
+                    SpikeData.Add(newSpike);
+                    Program.myHome.Log("Spike Loaded");
                 }
-
-                mrk = mrk + results + Environment.NewLine;
+                sampleIndex++;
             }
-            Program.myHome.Log(mrk);
+            
         }
 
         static IDataView CreateEmptyDataView(MLContext mlContext)

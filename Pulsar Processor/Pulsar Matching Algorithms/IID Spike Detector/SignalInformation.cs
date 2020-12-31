@@ -23,4 +23,10 @@ namespace Pulsar_Processor.Pulsar_Matching_Algorithms.IID_Spike_Detector
         [VectorType(3)]
         public double[] Prediction { get; set; }
     }
+
+    public class SpikeInformation
+    {
+        public int SampleIndex { get; set; }
+        public double SampleValue { get; set; }
+    }
 }

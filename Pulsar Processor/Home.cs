@@ -195,5 +195,11 @@ namespace Pulsar_Processor
             myThe.IsBackground = true;
             myThe.Start();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            SpikeDataFilter mySpikeFilter = new SpikeDataFilter();
+            mySpikeFilter.FilterSpikesFromIID();
+        }
     }
 }

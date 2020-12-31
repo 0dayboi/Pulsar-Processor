@@ -148,6 +148,7 @@
     <Compile Include="Pulsar Matching Algorithms\IID Spike Detector\Trainer.cs" />
     <Compile Include="Pulsar Matching Algorithms\ML_ModelTrainer.cs" />
     <Compile Include="Pulsar Matching Algorithms\SignalsDataInformation.cs" />
+    <Compile Include="Pulsar Matching Algorithms\SpikeDataFilter.cs" />
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
