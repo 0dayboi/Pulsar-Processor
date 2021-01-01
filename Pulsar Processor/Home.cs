@@ -199,7 +199,7 @@ namespace Pulsar_Processor
         private void button2_Click(object sender, EventArgs e)
         {
             SpikeDataFilter mySpikeFilter = new SpikeDataFilter();
-            mySpikeFilter.FilterSpikesFromIID();
+           // mySpikeFilter.FilterSpikesFromIID();
         }
     }
 }

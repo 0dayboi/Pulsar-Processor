@@ -31,28 +31,47 @@ namespace Pulsar_Processor.Pulsar_Matching_Algorithms.IID_Spike_Detector
 
         static void DetectSpike(MLContext mlContext, int docSize, IDataView signalView)
         {
-            var iidSpikeEstimator = mlContext.Transforms.DetectIidSpike(outputColumnName: nameof(PulsePrediction.Prediction), inputColumnName: nameof(SignalInformation.value), confidence: 95, pvalueHistoryLength: docSize / 4);
+
+            double a_max = 0;
+           
+
+            var iidSpikeEstimator = mlContext.Transforms.DetectIidSpike(outputColumnName: nameof(PulsePrediction.Prediction), inputColumnName: nameof(SignalInformation.value), confidence: 90, pvalueHistoryLength: docSize / 4);
             ITransformer iidSpikeTransform = iidSpikeEstimator.Fit(CreateEmptyDataView(mlContext));
             IDataView transformedData = iidSpikeTransform.Transform(signalView);
             var predictions = mlContext.Data.CreateEnumerable<PulsePrediction>(transformedData, reuseRowObject: false);
             Program.myHome.Log("Alert\tScore\tP-Value");
             string mrk = "";
             int sampleIndex = 1;
+
+            Program.myHome.Log("Ranking maximum weight");
+            foreach(var p in predictions)
+            {
+                if (p.Prediction[1] > a_max)
+                {
+                    a_max = p.Prediction[1];
+                }
+            }
+
             foreach (var p in predictions)
             {
                 var results = $"{p.Prediction[0]}\t{p.Prediction[1]:f2}\t{p.Prediction[2]:F2}";
 
                 if (p.Prediction[0] == 1)
                 {
-                    SpikeInformation newSpike = new SpikeInformation();
-                    newSpike.SampleIndex = sampleIndex;
-                    newSpike.SampleValue = p.Prediction[1];
-                    SpikeData.Add(newSpike);
-                    Program.myHome.Log("Spike Loaded");
+                    if (p.Prediction[1] > (a_max /1.5))
+                    {
+
+                        SpikeInformation newSpike = new SpikeInformation();
+                        newSpike.SampleIndex = sampleIndex;
+                        newSpike.SampleValue = p.Prediction[1];
+                        SpikeData.Add(newSpike);
+
+                    }
                 }
                 sampleIndex++;
             }
-            
+            SpikeDataFilter myN = new SpikeDataFilter();
+            myN.FilterSpikesFromIID(SpikeData);
         }
 
         static IDataView CreateEmptyDataView(MLContext mlContext)
