@@ -21,7 +21,7 @@ namespace Pulsar_Processor
         public static string FileLoaded = "";
         public static string FileData = "";
         public static string[] DataChunks;
-        public static List<int> PossiblePeriods = new List<int>();
+        public List<int> PossiblePeriods = new List<int>();
         public static List<double> DataChunks_Float = new List<double>();
         public static int CurrentPeriodTest = 0;
         Thread myEpochFolderThread;
@@ -32,7 +32,6 @@ namespace Pulsar_Processor
         {
             InitializeComponent();
             Home.CheckForIllegalCrossThreadCalls = false;
-
         }
 
         private void Home_Load(object sender, EventArgs e)
@@ -40,6 +39,10 @@ namespace Pulsar_Processor
             Pulsar_Database.PulsarDB mc = new Pulsar_Database.PulsarDB();
             mc.AddPulsars();
             Log("Pulsar processor initiated..");
+            if (Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Temp_DataPulsars")) == false)
+            {
+                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Temp_DataPulsars"));
+            }
         }
 
         #region Basic Data Processing
@@ -70,15 +73,6 @@ namespace Pulsar_Processor
         private void splitDataIntoArray()
         {
             DataChunks = FileData.Split(',');
-            //List<string> ks = DataChunks.ToList<string>();
-            //for (int index = 0; index < ks.Count; index++)
-            //{
-            //    if (ks[index] == "0")
-            //    {
-            //        ks.RemoveAt(index);
-            //    }
-            //}
-            //DataChunks = ks.ToArray<string>();
             Log("Array splitted into " + DataChunks.Length.ToString() + " chunks");
         }
         
@@ -104,7 +98,6 @@ namespace Pulsar_Processor
                     }
                 }
             }
-
             int sizeOfDatachunks = DataChunks_Float.Count;
             PossiblePeriods = new List<int>();
             for (int i = 2; i < sizeOfDatachunks; i++)
@@ -116,7 +109,6 @@ namespace Pulsar_Processor
                     PossiblePeriods.Add(i);
                 }
             }
-
             FixPeriods();
         }
 
@@ -138,24 +130,67 @@ namespace Pulsar_Processor
         }
         private void ChoosePeriod()
         {
+            //Reducing the periods, to more possible ones.
+            double gmc = DataChunks_Float.Count * 0.1;
+            gmc = gmc / 100;
+            for (int n = 0; n < PossiblePeriods.Count; n++)
+            {
+                if (PossiblePeriods[n] > gmc)
+                {
+                    PossiblePeriods.Remove(n);
+                }
+            }
             Random rn = new Random();
             int r = rn.Next(1, PossiblePeriods.Count);
             int CurrentPeriod = PossiblePeriods[r];
             PossiblePeriods.RemoveAt(r);
-            CurrentPeriodTest = 19;
+            CurrentPeriodTest = CurrentPeriod;
             Log("The choosen period is about " + CurrentPeriodTest + " bins");
         }
 
         private void LaunchEpochFolder()
         {
-            myEpochFolderThread = new Thread(myEpoch.EXTRACT_PULSAR);
+            ThreadStart starter = myEpoch.EXTRACT_PULSAR;
+            starter += () => {//Thread callback.
+                Program.myHome.Log("Folding completed, thread aborted, starting the spike filtering");
+                SaveFoldedSignalData();
+                StartAI();
+            };
+            myEpochFolderThread = new Thread(starter);
             myEpochFolderThread.Name = "Epoch folding thread";
             myEpochFolderThread.Priority = ThreadPriority.Highest;
             myEpochFolderThread.IsBackground = true;
             myEpochFolderThread.Start();
+          
+        }
+
+        private void SaveFoldedSignalData()
+        {
+            string folded_data = richTextBox1.Text;
+            string path_to_current = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Temp_DataPulsars", "CompleteFoldedPulsar.csv");
+            File.WriteAllText(path_to_current, folded_data);
+            Log("Data saved");
+        }
+
+        private void StartAI()
+        {
+            ThreadStart starter = myModel.EntryMain;
+            starter += () => {//Thread callback.
+                Program.myHome.Log("Folding completed, thread aborted, starting the spike filtering");
+                
+            };
+            Thread myThe = new Thread(starter);
+            myThe.Priority = ThreadPriority.Normal;
+            myThe.IsBackground = true;
+            myThe.Start();
         }
 
         #endregion
+
+
+        #region UI_Misc
+
+   
 
         private void btnSelectFile_Click(object sender, EventArgs e)
         {
@@ -183,23 +218,22 @@ namespace Pulsar_Processor
             LaunchEpochFolder();
         }
 
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            Thread myThe = new Thread(myModel.EntryMain);
-            myThe.Priority = ThreadPriority.Normal;
-            myThe.IsBackground = true;
-            myThe.Start();
+            StartAI();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             SpikeDataFilter mySpikeFilter = new SpikeDataFilter();
            // mySpikeFilter.FilterSpikesFromIID();
+        }
+
+        #endregion
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }

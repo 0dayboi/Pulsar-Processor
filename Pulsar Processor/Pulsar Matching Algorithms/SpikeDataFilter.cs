@@ -81,6 +81,7 @@ namespace Pulsar_Processor.Pulsar_Matching_Algorithms
             double lower_fix = period_in_seconds - 0.05;
             Program.myHome.Log("PULSAR PROCESING FINISHED");
             Program.myHome.Log("final period is " + period_in_seconds.ToString() + " seconds, upper fix is " + upper_fix.ToString() + " seconds, and lower fix is " + lower_fix.ToString());
+
         }
     }
 }

@@ -36,6 +36,7 @@
             this.btnStartPulsarProcessing = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -44,7 +45,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.pulsarDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showPulsarDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -131,6 +131,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "System Information";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(176, 33);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "Filter Spikes";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(176, 6);
@@ -181,6 +191,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(793, 24);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // pulsarDatabaseToolStripMenuItem
             // 
@@ -195,16 +206,6 @@
             this.showPulsarDatabaseToolStripMenuItem.Name = "showPulsarDatabaseToolStripMenuItem";
             this.showPulsarDatabaseToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.showPulsarDatabaseToolStripMenuItem.Text = "Show pulsar database";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(176, 33);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Filter Spikes";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Home
             // 

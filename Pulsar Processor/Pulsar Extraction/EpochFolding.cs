@@ -39,11 +39,14 @@ namespace Pulsar_Processor
             Program.myHome.Log("Folding completed. Folding length " + FoldedSignal.Count.ToString());
             Program.myHome.Log("Pulsar folded data dumping started, making the format readable");
             string finality = "";
+            int SampleIndex = 1;
             foreach(double c in FoldedSignal)
             {
                 string mks = c.ToString();
                 mks = mks.Replace(',','.');
-                finality = finality + Environment.NewLine + mks.ToString();
+                string sk = SampleIndex.ToString() + ";" + mks;
+                finality = finality + Environment.NewLine + sk.ToString();
+                SampleIndex++;
             }
             Program.myHome.GETTER(finality);
             Program.myHome.Log("Pulsars dumped, the following data can be opened on Signal Processing Toolbox on MATLAB");
