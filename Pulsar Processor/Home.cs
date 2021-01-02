@@ -131,7 +131,7 @@ namespace Pulsar_Processor
         private void ChoosePeriod()
         {
             //Reducing the periods, to more possible ones.
-            double gmc = DataChunks_Float.Count * 0.1;
+            double gmc = DataChunks_Float.Count * 0.01;
             gmc = gmc / 100;
             for (int n = 0; n < PossiblePeriods.Count; n++)
             {

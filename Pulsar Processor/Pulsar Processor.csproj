@@ -146,6 +146,7 @@
     <Compile Include="Pulsar Extraction\EpochFolding.cs" />
     <Compile Include="Pulsar Matching Algorithms\IID Spike Detector\SignalInformation.cs" />
     <Compile Include="Pulsar Matching Algorithms\IID Spike Detector\Trainer.cs" />
+    <Compile Include="Pulsar Matching Algorithms\MatcherAlgorithm.cs" />
     <Compile Include="Pulsar Matching Algorithms\SpikeDataFilter.cs" />
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
