@@ -39,6 +39,7 @@ namespace Pulsar_Processor
             Pulsar_Database.PulsarDB mc = new Pulsar_Database.PulsarDB();
             mc.AddPulsars();
             Log("Pulsar processor initiated..");
+            Log("Only 1-Dimensional CSV discrete time domain samples are valid, for the pulsar proccesor to process them.");
             if (Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Temp_DataPulsars")) == false)
             {
                 Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Temp_DataPulsars"));
@@ -234,6 +235,12 @@ namespace Pulsar_Processor
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        private void showPulsarDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Misc.PulsarDatabase myDataShowerr = new Misc.PulsarDatabase();
+            myDataShowerr.ShowDialog();
         }
     }
 }

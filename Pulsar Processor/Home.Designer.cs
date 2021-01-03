@@ -36,11 +36,12 @@
             this.btnStartPulsarProcessing = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.fileDialog = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.pulsarDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -120,8 +121,9 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.richTextBox1);
             this.groupBox1.Location = new System.Drawing.Point(205, 68);
@@ -131,30 +133,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "System Information";
             // 
-            // button2
+            // label6
             // 
-            this.button2.Location = new System.Drawing.Point(176, 33);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Filter Spikes";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(176, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Test AI";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 35);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(156, 13);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "Sampling Time :  468.11429 µs.";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 25);
+            this.label5.Location = new System.Drawing.Point(7, 17);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(113, 13);
             this.label5.TabIndex = 2;
@@ -163,11 +154,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(282, 24);
+            this.label4.Location = new System.Drawing.Point(255, 26);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(106, 13);
+            this.label4.Size = new System.Drawing.Size(134, 13);
             this.label4.TabIndex = 1;
-            this.label4.Text = "Pulsar Folded Data : ";
+            this.label4.Text = "Pulsar Folded Data Dump: ";
             // 
             // richTextBox1
             // 
@@ -176,6 +167,28 @@
             this.richTextBox1.Size = new System.Drawing.Size(180, 51);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(174, 34);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "Filter Spikes";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(174, 7);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Test AI";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // fileDialog
             // 
@@ -206,6 +219,7 @@
             this.showPulsarDatabaseToolStripMenuItem.Name = "showPulsarDatabaseToolStripMenuItem";
             this.showPulsarDatabaseToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.showPulsarDatabaseToolStripMenuItem.Text = "Show pulsar database";
+            this.showPulsarDatabaseToolStripMenuItem.Click += new System.EventHandler(this.showPulsarDatabaseToolStripMenuItem_Click);
             // 
             // Home
             // 
@@ -255,6 +269,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label6;
     }
 }
 
